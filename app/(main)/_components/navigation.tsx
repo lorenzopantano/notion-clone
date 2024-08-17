@@ -1,5 +1,6 @@
 "use client";
 
+import UserItem from "@/app/(main)/_components/user-item";
 import { cn } from "@/lib/utils";
 import { ChevronsLeft, MenuIcon } from "lucide-react";
 import { usePathname } from "next/navigation";
@@ -106,7 +107,7 @@ export default function Navigation() {
 					<ChevronsLeft className="w-6 h-6" />
 				</div>
 				<div>
-					<p>Action items</p>
+					<UserItem />
 				</div>
 				<div className="mt-4">
 					<p>Documents</p>
