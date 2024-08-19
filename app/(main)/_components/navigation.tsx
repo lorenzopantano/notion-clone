@@ -6,6 +6,7 @@ import TrashBox from "@/app/(main)/_components/trash-box";
 import UserItem from "@/app/(main)/_components/user-item";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { api } from "@/convex/_generated/api";
+import { useSearch } from "@/hooks/use-search";
 import { cn } from "@/lib/utils";
 import { useMutation, useQuery } from "convex/react";
 import { ChevronsLeft, MenuIcon, Plus, PlusCircle, Search, Settings, Trash } from "lucide-react";
@@ -26,6 +27,8 @@ export default function Navigation() {
 
 	const [isResetting, setIsResetting] = useState(false);
 	const [isCollapsed, setIsCollapsed] = useState(isMobile); // ** Sidebar auto-collapsed on mobile
+
+	const toggle = useSearch((state) => state.toggle);
 
 	React.useEffect(() => {
 		if (isMobile)
@@ -109,7 +112,7 @@ export default function Navigation() {
 			<aside
 				ref={sidebarRef}
 				className={cn(
-					"group/sidebar h-full bg-secondary overflow-y-auto relative flex w-60 flex-col z-[99999]",
+					"group/sidebar h-full bg-secondary overflow-y-auto relative flex w-60 flex-col z-[9999]",
 					isResetting && "transition-all ease-in-out duration-300",
 					isMobile && "w-0"
 				)}
@@ -126,7 +129,7 @@ export default function Navigation() {
 				</div>
 				<div>
 					<UserItem />
-					<Item onClick={() => {}} label="Search" icon={Search} isSearch />
+					<Item onClick={toggle} label="Search" icon={Search} isSearch />
 					<Item onClick={handleCreate} label="New page" icon={PlusCircle} />
 					<Item onClick={() => {}} label="Settings" icon={Settings} />
 				</div>
