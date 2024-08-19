@@ -1,5 +1,6 @@
 "use client";
 
+import DocumentList from "@/app/(main)/_components/document-list";
 import Item from "@/app/(main)/_components/item";
 import UserItem from "@/app/(main)/_components/user-item";
 import { api } from "@/convex/_generated/api";
@@ -15,7 +16,6 @@ export default function Navigation() {
 	const pathname = usePathname();
 	const isMobile = useMediaQuery("(max-width: 768px)");
 
-	const documents = useQuery(api.documents.get);
 	const create = useMutation(api.documents.create);
 
 	const isResizingRef = useRef(false);
@@ -129,9 +129,7 @@ export default function Navigation() {
 					<Item onClick={() => {}} label="Settings" icon={Settings} />
 				</div>
 				<div className="mt-4">
-					{documents?.map((document) => {
-						return <p>{document.title}</p>;
-					})}
+					<DocumentList />
 				</div>
 				<div
 					onMouseDown={handleMouseDown}
