@@ -2,6 +2,7 @@
 
 import DocumentList from "@/app/(main)/_components/document-list";
 import Item from "@/app/(main)/_components/item";
+import Navbar from "@/app/(main)/_components/navbar";
 import TrashBox from "@/app/(main)/_components/trash-box";
 import UserItem from "@/app/(main)/_components/user-item";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
@@ -11,13 +12,14 @@ import { useSettings } from "@/hooks/use-settings";
 import { cn } from "@/lib/utils";
 import { useMutation, useQuery } from "convex/react";
 import { ChevronsLeft, MenuIcon, Plus, PlusCircle, Search, Settings, Trash } from "lucide-react";
-import { usePathname } from "next/navigation";
+import { useParams, usePathname } from "next/navigation";
 import React, { ElementRef, useRef, useState } from "react";
 import { toast } from "sonner";
 import { useMediaQuery } from "usehooks-ts";
 
 export default function Navigation() {
 	const pathname = usePathname();
+	const params = useParams();
 	const isMobile = useMediaQuery("(max-width: 768px)");
 
 	const create = useMutation(api.documents.create);
@@ -161,15 +163,7 @@ export default function Navigation() {
 					isCollapsed && "left-0"
 				)}
 			>
-				<nav className="bg-transparent px-3 py-2 w-full">
-					{isCollapsed && (
-						<MenuIcon
-							className="h-6 w-6 text-muted-foreground"
-							role="button"
-							onClick={resetWidth}
-						/>
-					)}
-				</nav>
+				{!!params.documentId && <Navbar isCollapsed={isCollapsed} onResetWidth={resetWidth} />}
 			</div>
 		</>
 	);
