@@ -7,6 +7,7 @@ import UserItem from "@/app/(main)/_components/user-item";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { api } from "@/convex/_generated/api";
 import { useSearch } from "@/hooks/use-search";
+import { useSettings } from "@/hooks/use-settings";
 import { cn } from "@/lib/utils";
 import { useMutation, useQuery } from "convex/react";
 import { ChevronsLeft, MenuIcon, Plus, PlusCircle, Search, Settings, Trash } from "lucide-react";
@@ -29,6 +30,7 @@ export default function Navigation() {
 	const [isCollapsed, setIsCollapsed] = useState(isMobile); // ** Sidebar auto-collapsed on mobile
 
 	const toggle = useSearch((state) => state.toggle);
+	const settings = useSettings();
 
 	React.useEffect(() => {
 		if (isMobile)
@@ -131,7 +133,7 @@ export default function Navigation() {
 					<UserItem />
 					<Item onClick={toggle} label="Search" icon={Search} isSearch />
 					<Item onClick={handleCreate} label="New page" icon={PlusCircle} />
-					<Item onClick={() => {}} label="Settings" icon={Settings} />
+					<Item onClick={settings.onOpen} label="Settings" icon={Settings} />
 				</div>
 				<div className="mt-4">
 					<DocumentList />
