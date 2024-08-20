@@ -2,6 +2,7 @@ import IconPicker from "@/components/icon-picker";
 import { Button } from "@/components/ui/button";
 import { api } from "@/convex/_generated/api";
 import { Doc } from "@/convex/_generated/dataModel";
+import { useCoverImage } from "@/hooks/use-cover-image";
 import { useMutation } from "convex/react";
 import { ImageIcon, Smile, X } from "lucide-react";
 import React, { ElementRef } from "react";
@@ -19,6 +20,8 @@ export default function Toolbar({ initialData, preview }: ToolabarProps) {
 
 	const update = useMutation(api.documents.update);
 	const iconRemove = useMutation(api.documents.removeIcon);
+
+	const coverImage = useCoverImage();
 
 	const enableInput = () => {
 		if (preview) return;
@@ -86,7 +89,7 @@ export default function Toolbar({ initialData, preview }: ToolabarProps) {
 						className="text-muted-foreground text-xs"
 						variant={"outline"}
 						size={"sm"}
-						onClick={() => {}}
+						onClick={coverImage.onOpen}
 					>
 						<ImageIcon className="w-4 h-4 mr-2" />
 						Add cover

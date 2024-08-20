@@ -103,7 +103,7 @@ export default function Item({
 				</div>
 			)}
 			{documentIcon && <div className="shrink-0 mr-2 text-base">{documentIcon}</div>}
-			<Icon className="h-[18px] shrink-0 mr-1 text-muted-foreground" />
+			{!documentIcon && <Icon className="h-[18px] shrink-0 mr-1 text-muted-foreground" />}
 			<span className="truncate">{label}</span>
 			{isSearch && (
 				<kbd className="ml-auto pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
